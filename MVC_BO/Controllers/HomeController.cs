@@ -46,11 +46,15 @@ namespace MVC_BO.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Aluno aluno)
+
+        [ActionName("Edit")]
+        public ActionResult Edit_Post([Bind(Include ="Id,Nome,Email,Idade,Datainscricao,Sexo")] Aluno aluno)
         {
+            AlunoBLL alunobll = new AlunoBLL();
+            
+
             if (ModelState.IsValid)
             {
-                AlunoBLL alunobll = new AlunoBLL();
                 alunobll.AtualizarAluno(aluno);
                 return RedirectToAction("Index");
             }
